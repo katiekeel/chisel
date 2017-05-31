@@ -1,6 +1,8 @@
 class Chisel
 
-  def initialize
-  end
+  attr_reader :input
 
+  def initialize(input)
+    @input = input
+  end
 end
