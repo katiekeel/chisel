@@ -16,9 +16,14 @@ class ChiselTest < Minitest::Test
     assert_nil chisel.input
   end
 
-  def test_convert_single_hashtag_to_markdown
+  def test_convert_single_hashtag_to_h1
     chisel = Chisel.new("#")
     assert_equal chisel.convert_single_hashtag_to_h1, "<h1>"
+  end
+
+  def test_convert_double_hashtag_to_h2
+    chisel = Chisel.new("##")
+    assert_equal chisel.convert_double_hashtag_to_h2, "<h2>"
   end
 
   def test_convert_entire_string_to_html_with_hashtag
@@ -36,5 +41,9 @@ class ChiselTest < Minitest::Test
     assert_equal chisel.convert_entire_string_to_html, "<h1>A bug<h1>"
   end
 
+  def test_convert_method_with_double_hashtag
+    chisel = Chisel.new("##")
+    assert_equal chisel.convert, "<h2>"
+  end
 
 end
