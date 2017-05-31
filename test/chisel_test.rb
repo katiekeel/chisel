@@ -41,4 +41,15 @@ class ChiselTest < Minitest::Test
     assert_equal chisel.convert_entire_string_to_html, "<h5>"
   end
 
+  def test_convert_double_newline_to_p
+    chisel = Chisel.new("\n\n")
+    assert_equal chisel.convert_entire_string_to_html, "<p>"
+  end
+
+  def test_convert_double_newlines_to_p_with_ending_p
+    chisel = Chisel.new("A cat went\n\nto the park")
+    assert_equal chisel.convert_entire_string_to_html, "A cat went<p>to the park</p>"
+  end
+
+
 end
