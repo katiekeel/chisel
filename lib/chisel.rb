@@ -33,7 +33,7 @@ class Chisel
   end
 
   def check_for_ending_p_tag(line)
-    if line.include?("\n\n") == false && line.include?("<h") == false && line.end_with?("<p>") == false
+    if line.include?("<h") == false && line.end_with?("<p>") == false
       line = line + "</p>"
     end
     line
