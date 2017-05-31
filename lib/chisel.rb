@@ -13,7 +13,6 @@ class Chisel
       "### " => "<h3>",
       "## " => "<h2>",
       "# " => "<h1>",
-      " #" => "</h1>",
       "\n\n" => "<p>"
     }
   end
@@ -26,18 +25,24 @@ class Chisel
           line.gsub!(key, value)
         end
       end
-      line = check_for_ending_p_tag(line)
+      line = check_for_ending_tag(line)
       output += line
     end
     output
   end
 
-  def check_for_ending_p_tag(line)
-    if line.include?("<h") == false && line.end_with?("<p>") == false
-      line = line + "</p>"
-    end
-    line
+  def check_for_ending_tag(line)
+      conversion_key.each_value do |value|
+        if line.include?(value)
+          value = value.gsub("<", "</") unless value == "<p>"
+          line = line + "#{value}" unless line.end_with?(value)
+        end
+      end
+      line = line + "</p>" if line.include?("<p>") == false && line.include?("<h") == false
+      line
   end
+
+
 
 
 end

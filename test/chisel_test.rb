@@ -18,27 +18,27 @@ class ChiselTest < Minitest::Test
 
   def test_convert_single_hashtag_to_h1
     chisel = Chisel.new("# ")
-    assert_equal chisel.convert_entire_string_to_html, "<h1>"
+    assert_equal chisel.convert_entire_string_to_html, "<h1></h1>"
   end
 
   def test_convert_double_hashtag_to_h2
     chisel = Chisel.new("## ")
-    assert_equal chisel.convert_entire_string_to_html, "<h2>"
+    assert_equal chisel.convert_entire_string_to_html, "<h2></h2>"
   end
 
   def test_convert_triple_hashtag_to_h3
     chisel = Chisel.new("### ")
-    assert_equal chisel.convert_entire_string_to_html, "<h3>"
+    assert_equal chisel.convert_entire_string_to_html, "<h3></h3>"
   end
 
   def test_convert_quad_hashtag_to_h4
     chisel = Chisel.new("#### ")
-    assert_equal chisel.convert_entire_string_to_html, "<h4>"
+    assert_equal chisel.convert_entire_string_to_html, "<h4></h4>"
   end
 
   def test_convert_penta_hashtag_to_h5
     chisel = Chisel.new("##### ")
-    assert_equal chisel.convert_entire_string_to_html, "<h5>"
+    assert_equal chisel.convert_entire_string_to_html, "<h5></h5>"
   end
 
   def test_convert_double_newline_to_p
@@ -51,5 +51,9 @@ class ChiselTest < Minitest::Test
     assert_equal chisel.convert_entire_string_to_html, "A cat went<p>to the park</p>"
   end
 
+  def test_ending_h1_tag
+    chisel = Chisel.new("# Hello!")
+    assert_equal chisel.convert_entire_string_to_html, "<h1>Hello!</h1>"
+  end
 
 end
