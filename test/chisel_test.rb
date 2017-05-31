@@ -16,4 +16,9 @@ class ChiselTest < Minitest::Test
     assert_nil chisel.input
   end
 
+  def test_convert_single_hashtag_to_markdown
+    chisel = Chisel.new("#")
+    assert_equal chisel.convert_single_hashtag_to_h1, "<h1>"
+  end    
+
 end
